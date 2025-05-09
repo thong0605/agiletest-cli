@@ -45,12 +45,14 @@ agiletest --data-center --data-center-token your_personal_access_token [COMMANDS
 Or set them as environment variables:
 
 Cloud Edition:
+
 ```shell
 export AGILETEST_CLIENT_ID=your_client_id
 export AGILETEST_CLIENT_SECRET=your_client_secret
 ```
 
 Data Center Edition:
+
 ```shell
 export AGILETEST_DC_TOKEN=your_personal_access_token
 ```
@@ -61,6 +63,7 @@ Example: Import test execution results from a JUnit XML file `tests/junit-test-d
 to a Test Execution issue in AgileTest.
 
 Cloud Edition:
+
 ```shell
 # with python CLI
 agiletest --client-id your_client_id --client-secret your_client_secret \
@@ -79,6 +82,7 @@ docker run --rm -i \
 ```
 
 Data Center Edition:
+
 ```shell
 # with python CLI
 agiletest --data-center --data-center-token your_personal_access_token \
@@ -88,9 +92,9 @@ agiletest --data-center --data-center-token your_personal_access_token \
 
 # or with docker
 docker run --rm -i \
-    --data-center \
     -e AGILETEST_DC_TOKEN=your_personal_access_token \
     ghcr.io/agiletestapp/agiletest-cli \
+    --data-center \
     test-execution import \
     --framework-type junit --project-key TC \
     --test-execution-key TC-202 <tests/junit-test-data.xml
