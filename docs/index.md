@@ -93,6 +93,7 @@ agiletest --data-center --data-center-token your_personal_access_token \
 # or with docker
 docker run --rm -i \
     -e AGILETEST_DC_TOKEN=your_personal_access_token \
+    -e AGILETEST_BASE_URL=https://your-jira-datacenter-instance.com/ \
     ghcr.io/agiletestapp/agiletest-cli \
     --data-center \
     test-execution import \
