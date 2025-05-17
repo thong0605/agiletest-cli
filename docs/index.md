@@ -22,24 +22,14 @@ For full CLI documentation, visit [AgileTest CLI Documentation](cli.md).
 
 See [CI/CD Integration](ci-cd.md) for examples of how to integrate AgileTest CLI with popular CI/CD tools.
 
-### Authentication
+### Authentication with Cloud Edition
 
-Cloud Edition:
 To use the CLI, you need to [generate a pair of client ID and client secret from AgileTest](https://docs.devsamurai.com/agiletest/access-api-documentation).
 
 You can pass the client ID and client secret as command line arguments:
 
 ```shell
 agiletest --client-id your_client_id --client-secret your_client_secret [COMMANDS]
-```
-
-Data Center Edition:
-In Data Center, you need to [generate a personal access token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html)
-
-You can pass the personal access token as command line arguments:
-
-```shell
-agiletest --data-center --data-center-token your_personal_access_token [COMMANDS]
 ```
 
 Or set them as environment variables:
@@ -51,10 +41,21 @@ export AGILETEST_CLIENT_ID=your_client_id
 export AGILETEST_CLIENT_SECRET=your_client_secret
 ```
 
-Data Center Edition:
+### Authentication with Data Center Edition
+
+In Data Center, you need to [generate a personal access token](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html) for your Jira account.
+
+You can pass the personal access token as command line arguments, together with your Jira instance base URL:
+
+```shell
+agiletest --data-center --data-center-token your_personal_access_token --base-url https://your-jira-datacenter-instance.com [COMMANDS]
+```
+
+Or set them as environment variables:
 
 ```shell
 export AGILETEST_DC_TOKEN=your_personal_access_token
+export AGILETEST_BASE_URL=https://your-jira-datacenter-instance.com
 ```
 
 ### Import Test Execution Results
@@ -85,7 +86,9 @@ Data Center Edition:
 
 ```shell
 # with python CLI
-agiletest --data-center --data-center-token your_personal_access_token \
+agiletest --data-center \
+    --data-center-token your_personal_access_token \
+    --base-url https://your-jira-datacenter-instance.com \
     test-execution import \
     --framework-type junit --project-key TC \
     --test-execution-key TC-202 tests/junit-test-data.xml
@@ -93,7 +96,7 @@ agiletest --data-center --data-center-token your_personal_access_token \
 # or with docker
 docker run --rm -i \
     -e AGILETEST_DC_TOKEN=your_personal_access_token \
-    -e AGILETEST_BASE_URL=https://your-jira-datacenter-instance.com/ \
+    -e AGILETEST_BASE_URL=https://your-jira-datacenter-instance.com \
     ghcr.io/agiletestapp/agiletest-cli \
     --data-center \
     test-execution import \
